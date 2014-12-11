@@ -1,0 +1,9 @@
+sourceEncoding: UTF-8
+data: tdd(../variables.tdd)
+freemarkerLinks: {
+    lib: lib/
+}
+borders:
+[
+	header("<#include '@lib/common.ftl'>", 	*html)
+]
