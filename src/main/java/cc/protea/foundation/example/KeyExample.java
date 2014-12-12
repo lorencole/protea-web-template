@@ -1,4 +1,4 @@
-package cc.protea.services;
+package cc.protea.foundation.example;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
