@@ -16,7 +16,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Path("/key")
 @Api(value = "/key", description = "Key")
 @Produces(MediaType.TEXT_PLAIN)
-public class KeyService {
+public class KeyExample {
 
 	@GET
 	@Path("/{id}")
