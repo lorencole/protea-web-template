@@ -16,6 +16,7 @@ import cc.protea.foundation.integrations.RedisUtil;
 import cc.protea.foundation.utility.ProteaUser;
 import cc.protea.foundation.utility.UserUtil;
 import cc.protea.foundation.utility.services.GenericResponse;
+import cc.protea.foundation.utility.services.ProteaService;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -23,7 +24,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Path("/example/users")
 @Api(value = "/example/users", description = "User Example")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserExample {
+public class UserExample extends ProteaService {
 
 	@GET
 	@ApiOperation(value = "List all user records")

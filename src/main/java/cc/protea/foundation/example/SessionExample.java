@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import cc.protea.foundation.integrations.RedisUtil;
 import cc.protea.foundation.utility.SessionUtil;
 import cc.protea.foundation.utility.services.GenericResponse;
+import cc.protea.foundation.utility.services.ProteaService;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -18,7 +19,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Path("/example/sessions")
 @Api(value = "/example/sessions", description = "Session Example")
 @Produces(MediaType.APPLICATION_JSON)
-public class SessionExample {
+public class SessionExample extends ProteaService {
 
 	@GET
 	@ApiOperation(value = "List all sessions")
