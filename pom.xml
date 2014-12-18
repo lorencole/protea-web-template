@@ -12,7 +12,7 @@
 	<url>http://maven.apache.org</url>
 
 	<issueManagement>
-		<url>https://github.com/rjstanford/protea-templtae/issues</url>
+		<url>https://github.com/rjstanford/protea-foundation-template/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
@@ -25,9 +25,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/rjstanford/protea-template</url>
-		<connection>scm:git:git://github.com/rjstanford/protea-template.git</connection>
-		<developerConnection>scm:git:git@github.com:rjstanford/protea-template.git</developerConnection>
+		<url>https://github.com/rjstanford/protea-foundation-template</url>
+		<connection>scm:git:git://github.com/rjstanford/protea-foundation-template.git</connection>
+		<developerConnection>scm:git:git@github.com:rjstanford/protea-foundation-template.git</developerConnection>
 	</scm>
 
 	<developers>
