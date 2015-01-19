@@ -1,15 +1,24 @@
-<#macro page title>
+<#macro pageHeader title icon="" subtitle="">
 
-<html>
-<head>
-<title>${title}</title>
-</head>
-<body>
-<h1>${title}</h1>
-<p>This content is in the page.ftl.html template</p>
-<#nested>
-<p>This content is also in the template</p>
-</body>
-</html>
+<div class="row">
+	<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa-fw fa fa-${icon}"></i> 
+			${title}
+			<#if subtitle?has_content>
+			<span>&gt; ${subtitle}</span>
+			</#if>
+		</h1>
+	</div>	
+</div>
+
+<section id="widget-grid" class="">		
+
+</#macro>
+
+
+<#macro pageFooter>
+
+</section>
 
 </#macro>
