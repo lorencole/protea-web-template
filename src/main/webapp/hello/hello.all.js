@@ -1306,7 +1306,7 @@ hello.utils.extend( hello.utils, {
 							href : a.href
 						},
 						close : function(){
-							alert('closing location:'+url);
+//							alert('closing location:'+url);
 							if(popup.close){
 								popup.close();
 							}
@@ -1540,7 +1540,7 @@ hello.utils.extend( hello.utils, {
 
 		function closeWindow(){
 
-			alert("Closing: " + window.location.href);
+//			alert("Closing: " + window.location.href);
 			
 			// Close this current window
 			try{
