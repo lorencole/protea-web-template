@@ -43,37 +43,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>aws-release</id>
-			<name>AWS Release Repository</name>
-			<url>s3://protea-repo/release</url>
-		</repository>
-		<snapshotRepository>
-			<id>aws-snapshot</id>
-			<name>AWS Snapshot Repository</name>
-			<url>s3://protea-repo/snapshot</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<repositories>
-		<repository>
-			<id>aws-release</id>
-			<name>AWS Release Repository</name>
-			<url>s3://protea-repo/release</url>
-		</repository>
-		<repository>
-			<id>aws-snapshot</id>
-			<name>AWS Snapshot Repository</name>
-			<url>s3://protea-repo/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 	<dependencies>
-
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -91,13 +61,6 @@
 	</dependencies>
 
 	<build>
-		<extensions>
-			<extension>
-				<groupId>org.springframework.build</groupId>
-				<artifactId>aws-maven</artifactId>
-				<version>5.0.0.RELEASE</version>
-			</extension>
-		</extensions>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
