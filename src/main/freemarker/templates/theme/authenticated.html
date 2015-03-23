@@ -25,7 +25,11 @@
 	var initialHash = window.location.hash;
 	window.onlogin = function() {
 		if (initialHash) {
-			window.location.hash = initialHash;
+			if (window.location.hash == initialHash) {
+				window.onhashchange();
+			} else {
+				window.location.hash = initialHash;
+			}
 			delete initialHash;
 		} else {
 			window.location.hash = 'index.html';

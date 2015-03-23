@@ -23,7 +23,12 @@
 
 	<script>
 	window.onlogout = function() {
-		window.location.hash = 'login.html';
+		console.log("In window.onlogout");
+		if (window.location.hash && window.location.hash == '#login.html') {
+			window.onhashchange();
+		} else {
+			window.location.hash = 'login.html';
+		}
 	}
 	</script>
 

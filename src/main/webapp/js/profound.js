@@ -133,9 +133,41 @@ Profound.App = function() {
 		$.ajax(request);
 	};
 	
-	self.initialHash = window.location.hash;
-	
 	self.me = ko.observable();
+	self.me.subscribe(function(newValue) {
+		if (newValue != null) {
+			if (window.onlogin) {
+				window.onlogin();
+			}
+		} else {
+			if (window.onlogout) {
+				window.onlogout();
+			}
+		}
+	});
+	
+	self.reloadCurrentUser = function() {
+		console.log("Loading current user for session token " + localStorage.sessionToken);
+		self.syncAjax('GET', '/api/users/current', null, function(data) {
+			self.me(data);
+			console.log("Current user loaded");
+			if (window.onlogin) {
+				console.log("Calling window.onlogin");
+				window.onlogin();
+			}
+		}, function(error) {
+			self.me(null);
+			console.log("Could not access current user");
+			localStorage.removeItem('sessionToken');
+			if (window.onlogout) {
+				window.onlogout();
+			} else {
+				if (window.location.hash) {
+					window.onhashchange();
+				}
+			}
+		});
+	}
 	
 	self.initialize = function() {
 	
@@ -149,40 +181,33 @@ Profound.App = function() {
 				}
 			}
 		} else {
-			console.log("Loading current user for session token " + localStorage.sessionToken);
-			self.syncAjax('GET', '/api/users/current', null, function(data) {
-				delete self.initialHash;
-				self.me(data);
-				console.log("Current user loaded");
-			}, function(error) {
-				console.log("Could not access current user");
-				if (window.onlogout) {
-					window.onlogout();
-				} else {
-					if (window.location.hash) {
-						window.onhashchange();
-					}
-				}
-			});
+			self.reloadCurrentUser();
 		}
 		
-		$('body').css('visibility', 'visible');	
-		
-		self.me.subscribe(function(newValue) {
-			if (newValue != null) {
-				if (self.initialHash) {
-					window.location.hash = self.initialHash;
-				}
-				if (window.onlogin) {
-					window.onlogin();
-				}
-			} else {
-				if (window.onlogout) {
-					window.onlogout();
-				}
-			}
-		});
+		$('body').css('visibility', 'visible');			
 		
 	};
 
 }
+
+hello.on('auth.login', function(auth){
+	
+	console.log("Got an auth response from " + auth.network);
+	console.log(auth);
+	
+	if (! localStorage.sessionToken) {
+		var data = {};
+		var key = auth.network + 'AccessToken';
+		data[key] = auth.authResponse.access_token;
+		app.syncAjax('POST', '/api/sessions/login', JSON.stringify(data), function(response) {
+			console.log(response);
+			if (response.sessionToken) {
+				localStorage.sessionToken = response.sessionToken;
+			}
+			app.reloadCurrentUser();
+		});
+	} else {
+		// TODO add token to the current user?
+	}
+	
+});

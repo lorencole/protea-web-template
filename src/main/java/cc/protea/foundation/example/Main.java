@@ -11,6 +11,7 @@ public class Main {
 		ProfoundConfiguration.publicUrl = "http://localhost.fieldraiser.com:8080";
 		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.example");
 		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.utility.example");
+		ProfoundConfiguration.createSocialAccounts = true;
 
 		ProfoundServer.start();
 
