@@ -1,5 +1,7 @@
 <#macro pageHeader title icon="" subtitle="">
 
+<!-- ko if: ! me() -->
+
 <div class="row">
 	<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">
 		<h1 class="page-title txt-color-blueDark">
@@ -14,11 +16,17 @@
 
 <section id="widget-grid" class="">		
 
+<!-- /ko -->
+
 </#macro>
 
 
 <#macro pageFooter>
 
+<!-- ko if: me() -->
+
 </section>
+
+<!-- /ko -->
 
 </#macro>

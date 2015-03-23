@@ -16,19 +16,35 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.6/jquery.floatThead.min.js"></script>
+	
+	<#include "index/scripts.html"/>
 	
 	<script src="js/profound.js"></script>
+
+	<!-- ko if: ! me() -->
+	
+	<#include "theme/unknown.html"/>
+	
+	<!-- /ko -->
+	
+	<!-- ko if: me() -->
+	
+	<#include "theme/authenticated.html"/>
+	
+	<!-- /ko -->
 		
 	<script>
 		app = new Profound.App();
 		ko.applyBindings(app);
+		app.initialize();
 	</script>
 	
 	<#if googleAnalyticsId?has_content>
 	
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
-		_gaq.push([ '_setAccount', ${googleAnalyticsId} ]);
+		_gaq.push([ '_setAccount', '${googleAnalyticsId}' ]);
 		_gaq.push([ '_trackPageview' ]);
 		(function() {
 			var ga = document.createElement('script');

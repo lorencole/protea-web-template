@@ -38,11 +38,13 @@
 	
 	<@pageFooter></@pageFooter>
 
-	<#if script?has_content>
 	<script>
+	<#if script?has_content>
 	pageLocalScript = function() { ${script} };
-	</script>
+	<#else>
+	pageLocalScript = function() { if (page && page.onload) { page.onload(); } };
 	</#if>
+	</script>
 
 </#macro>
 

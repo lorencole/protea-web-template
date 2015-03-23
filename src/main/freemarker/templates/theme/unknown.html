@@ -1,0 +1,30 @@
+<#-- Replace this file with your theme framework - only the body tags have been defined externally.
+     This file MUST include an element with the id profoundInnerPage for hash replacement to work -->
+
+<div class="container">
+
+	<div class="starter-template">
+		<h1>Unknown</h1>
+		<p class="lead">
+			Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.
+		</p>
+	</div>
+			
+	<ul>
+	<li><a href="#login.html">Login Page</a></li>
+	<li><a href="#sendPasswordEmail.html">Send Password Page</a></li>
+	<li><a href="#validateEmail.html">Validate Email Page (hidden)</a></li>
+	<li><a href="#resetPassword.html">Set Password Page (hidden)</a></li>
+	</ul>
+	
+	<div id="profoundInnerPage"></div>
+	
+	<div class="row">Some footer information</div>
+
+	<script>
+	window.onlogout = function() {
+		window.location.hash = 'login.html';
+	}
+	</script>
+
+</div>

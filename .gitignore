@@ -3,3 +3,6 @@
 /.project
 /.classpath
 /src/main/webapp/*.html
+/src/main/webapp/authenticated
+/src/main/webapp/theme
+/src/main/webapp/unknown
