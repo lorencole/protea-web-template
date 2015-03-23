@@ -46,9 +46,9 @@
       }
     });
 
-    $('#input_apiKey')[0].value = localStorage.authorizationToken;
-    window.authorizations.add("key", new PasswordAuthorization("auth", localStorage.authorizationToken, ""));
-    console.log("added API key " + localStorage.authorizationToken);
+    $('#input_apiKey')[0].value = localStorage.sessionToken;
+    window.authorizations.add("key", new PasswordAuthorization("auth", localStorage.sessionToken, ""));
+    console.log("added API key " + localStorage.sessionToken);
 
     window.swaggerUi.load();
   });
