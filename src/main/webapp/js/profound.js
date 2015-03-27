@@ -2,6 +2,20 @@ var Profound = Profound || {};
 
 Profound.Util = Profound.Util || {};
 
+Profound.Util.setHash = function(hash) {
+	if (! hash || hash.length == 0) {
+		return;
+	}
+	if (hash.substring(0, 1) != '#') {
+		hash = '#' + hash;
+	}
+	if (window.location.hash && window.location.hash == hash) {
+		window.onhashchange();
+	} else {
+		window.location.hash = hash;
+	}
+};
+
 Profound.Util.loadURL = function(url, container){
 	pageLocalScript = null;
 	container
@@ -147,6 +161,10 @@ Profound.App = function() {
 	});
 	
 	self.reloadCurrentUser = function() {
+		if (! localStorage.sessionToken) {
+			self.me(null);
+			return;
+		}
 		console.log("Loading current user for session token " + localStorage.sessionToken);
 		self.syncAjax('GET', '/api/users/current', null, function(data) {
 			self.me(data);
@@ -167,10 +185,17 @@ Profound.App = function() {
 				}
 			}
 		});
-	}
+	};
+	
+	self.knownUser = function() {
+		if (! self.me()) {
+			return false;
+		}
+		// TODO validate email &c
+		return true;
+	};
 	
 	self.initialize = function() {
-	
 		if (! localStorage.sessionToken) {
 			console.log("No session token");
 			if (window.onlogout) {
@@ -183,31 +208,43 @@ Profound.App = function() {
 		} else {
 			self.reloadCurrentUser();
 		}
-		
 		$('body').css('visibility', 'visible');			
-		
 	};
 
+	self.logout = function() {
+		app.ajax('POST', '/api/sessions/logout', null, function(response) {
+			if (response && response.success) {
+				app.me(null);
+				localStorage.removeItem('sessionToken');
+				if (window.onlogout) {
+					window.onlogout();
+				} else {
+					if (window.location.hash) {
+						window.onhashchange();
+					}
+				}
+			}
+		});
+	};
 }
 
-hello.on('auth.login', function(auth){
-	
-	console.log("Got an auth response from " + auth.network);
-	console.log(auth);
-	
+hello.init( Profound.Config.Social , {
+	redirect_uri : '/hello/redirect.html',
+	oauth_proxy  : '/helloshim'
+});
+
+hello.on('auth.login', function(auth) {
 	if (! localStorage.sessionToken) {
 		var data = {};
 		var key = auth.network + 'AccessToken';
 		data[key] = auth.authResponse.access_token;
 		app.syncAjax('POST', '/api/sessions/login', JSON.stringify(data), function(response) {
-			console.log(response);
-			if (response.sessionToken) {
+			if (response && response.sessionToken) {
 				localStorage.sessionToken = response.sessionToken;
 			}
 			app.reloadCurrentUser();
 		});
 	} else {
 		// TODO add token to the current user?
-	}
-	
+	}	
 });

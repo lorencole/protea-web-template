@@ -1,34 +1,30 @@
 <#-- Replace this file with your theme framework - only the body tags have been defined externally.
-     This file MUST include an element with the id profoundInnerPage for hash replacement to work -->
+     This file MUST include an element with the id profoundInnerPage for hash replacement to work.
+     This would be a great place to define your window.onlogout() function to set the hash to something useful. -->
 
 <div class="container">
 
 	<div class="starter-template">
-		<h1>Unknown</h1>
+		<h1>Welcome</h1>
 		<p class="lead">
-			Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.
+			This is a sample template shown when we don't recognize a user. This should be changed in your own application. 
 		</p>
 	</div>
 			
-	<ul>
-	<li><a href="#login.html">Login Page</a></li>
-	<li><a href="#sendPasswordEmail.html">Send Password Page</a></li>
-	<li><a href="#validateEmail.html">Validate Email Page (hidden)</a></li>
-	<li><a href="#resetPassword.html">Set Password Page (hidden)</a></li>
-	</ul>
+	<div class="row">
+		<ul>
+		<li><a href="#login.html">Login Page</a></li>
+		<li><a href="#signup.html">Login Page</a></li>
+		</ul>
+	</div>
 	
 	<div id="profoundInnerPage"></div>
 	
-	<div class="row">Some footer information</div>
+	<div class="row">Some footer information could go here</div>
 
 	<script>
 	window.onlogout = function() {
-		console.log("In window.onlogout");
-		if (window.location.hash && window.location.hash == '#login.html') {
-			window.onhashchange();
-		} else {
-			window.location.hash = 'login.html';
-		}
+		Profound.Util.setHash('login.html');
 	}
 	</script>
 

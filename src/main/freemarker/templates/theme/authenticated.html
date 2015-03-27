@@ -8,11 +8,13 @@
 		<p class="lead">
 			Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.
 		</p>
+		<a data-bind="click: logout">Logout</a>
 	</div>
 	
 	<ul>
-	<li><a href="#something.html">Something</a>
-	<li><a href="#other.html">Other</a>
+	<li><a href="#index.html">Welcome</a>
+	<li><a href="#profile.html">Profile</a>
+	<li><a href="#logout.html">Logout</a>
 	</ul>
 		
 	<p>Logged In</p>
@@ -25,14 +27,10 @@
 	var initialHash = window.location.hash;
 	window.onlogin = function() {
 		if (initialHash) {
-			if (window.location.hash == initialHash) {
-				window.onhashchange();
-			} else {
-				window.location.hash = initialHash;
-			}
+			Profound.Util.setHash(initialHash);
 			delete initialHash;
 		} else {
-			window.location.hash = 'index.html';
+			Profound.Util.setHash('index.html');
 		}
 	};
 	</script>
