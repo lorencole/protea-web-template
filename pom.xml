@@ -12,7 +12,7 @@
 	<url>http://maven.apache.org</url>
 
 	<issueManagement>
-		<url>https://github.com/rjstanford/protea-foundation-template/issues</url>
+		<url>https://github.com/protea/protea-web-template/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
@@ -25,9 +25,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/rjstanford/protea-foundation-template</url>
-		<connection>scm:git:git://github.com/rjstanford/protea-foundation-template.git</connection>
-		<developerConnection>scm:git:git@github.com:rjstanford/protea-foundation-template.git</developerConnection>
+		<url>https://github.com/protea/protea-web-template</url>
+		<connection>scm:git:git://github.com/protea/protea-web-template.git</connection>
+		<developerConnection>scm:git:git@github.com:protea/protea-web-template.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -53,8 +53,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>cc.protea.foundation</groupId>
-			<artifactId>utility</artifactId>
+			<groupId>cc.protea.platform</groupId>
+			<artifactId>platform</artifactId>
 			<version>[0.0.1-SNAPSHOT,)</version>
 		</dependency>
 
