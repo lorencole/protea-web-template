@@ -45,7 +45,7 @@ public class UsersService extends ProteaService {
 	@ApiOperation(value = "Get active sessions for the current user", response = String.class, responseContainer="Set")
 	@RolesAllowed("loggedIn")
 	public Set<String> currentSessions() {
-		return UserUtil.getSessionsForUser(getUserId());
+		return SessionUtil.getAllForUser(getUserId());
 	}
 
 	@POST

@@ -1,0 +1,12 @@
+{
+  "name": "Profound Template Application",
+  "description": "A barebones template application using the Profound framework",
+  "keywords": ["protea", "profound", "template"],
+  "addons": [
+    "cleardb",
+    "rediscloud",
+    "mandrill",
+    "papertrail",
+    "newrelic"
+  ]
+}
