@@ -20,14 +20,14 @@
 			var pageObj = app.pages['${pp.sourceFileName}'];
 			if (pageObj && pageObj.generated && pageObj.generated == currentPageGenerated) {
 				window.page = pageObj;
-				alwaysFxn && alwaysFxn();
+				alwaysFxn && alwaysFxn(app.pages['${pp.sourceFileName}']);
 				return;
 			}
 			app.pages['${pp.sourceFileName}'] = {};
 			app.pages['${pp.sourceFileName}'].generated = currentPageGenerated;
 			window.page = app.pages['${pp.sourceFileName}'];
-			fxn && fxn();
-			alwaysFxn && alwaysFxn();
+			fxn && fxn(app.pages['${pp.sourceFileName}']);
+			alwaysFxn && alwaysFxn(app.pages['${pp.sourceFileName}']);
 		}
 	
 	</script>

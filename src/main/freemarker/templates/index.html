@@ -14,13 +14,14 @@
 	<#include "index/stylesheets.html"/>
 </head>
 
-<body>
+<body data-bind='validationOptions: { messageTemplate: "customMessageTemplate", decorateInputElement: true }'>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.6/jquery.floatThead.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.10/jquery.floatThead.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/1.0/zxcvbn-async.min.js"></script>
 	<script>
 		var Profound = Profound || {};
 		Profound.Config = Profound.Config || {};
@@ -29,6 +30,33 @@
 	<script src="configuration.js"></script>
 	<script src="hello/hello.all.js"></script>
 	
+	<script type="text/html" id="customMessageTemplate">
+		<span class="input-group-addon validationElement validationMessage" data-bind="visible: field.isModified() && !field.isValid(), validationMessage: field">
+		</span>
+	</script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.2/knockout.validation.min.js"></script>
+<script>
+	ko.validation.defineLocale('en-US', {
+		required: 'Required',
+		min: 'At least {0}.',
+		max: 'At most {0}',
+		minLength: 'Please enter at least {0} characters.',
+		maxLength: 'Please enter no more than {0} characters.',
+		pattern: 'Invalid',
+		step: 'The value must increment by {0}.',
+		email: 'Email',
+		date: 'Date',
+		dateISO: 'Date',
+		number: 'Number',
+		digit: 'Digit',
+		phoneUS: 'Phone',
+		equal: 'Different',
+		notEqual: 'Invalid',
+		unique: 'Unique'
+	});
+	ko.validation.locale('en-US');
+		</script>
 	<#include "index/scripts.html"/>
 	
 	<script src="js/profound.js"></script>
@@ -47,7 +75,12 @@
 		
 	<script>
 		app = new Profound.App();
-		ko.applyBindings(app);
+	</script>
+	
+	<script src="js/application.js"></script>
+	
+	<script>
+ 		ko.applyBindings(app);
 		app.initialize();
 	</script>
 	

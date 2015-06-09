@@ -37,7 +37,8 @@ public class UsersService extends ProteaService {
 	@ApiOperation(value = "Get the current user", response = ProteaUser.class)
 	@RolesAllowed("loggedIn")
 	public ProteaUser current() {
-		return UserUtil.getProteaUser(getUserId());
+		ProteaUser user = UserUtil.getProteaUser(getUserId());
+		return user;
 	}
 
 	@GET
@@ -56,6 +57,25 @@ public class UsersService extends ProteaService {
 		AuthenticationResponse response = AuthenticationController.authenticate(request);
 		if (response.success) {
 			return response;
+		}
+		// Next, let's check to see if there's an account with that email address
+		if (request.emailAddress != null) {
+			ProteaUser user = UserUtil.getProteaUser(UserUtil.getUserIdByEmail(request.emailAddress));
+			if (user != null) {
+				response.message = "The user " + request.emailAddress + " already exists; please login with your ";
+				if (user.authentication.facebook) {
+					response.message += " Facebook account";
+				} else if (user.authentication.google) {
+					response.message += " Google account";
+				} else if (user.authentication.twitter) {
+					response.message += " Twitter account";
+				} else if (user.authentication.linkedIn) {
+					response.message += " LinkedIn account.";
+				} else {
+					response.message += " password.";
+				}
+				return response;
+			}
 		}
 		// NOTE: response is now a failure response
 		// Let's make sure that we have enough information
@@ -83,6 +103,7 @@ public class UsersService extends ProteaService {
 		}
 		return AuthenticationResponse.success(SessionUtil.create(userId));
 	}
+
 
 	@PUT
 	@Path("/setPassword")

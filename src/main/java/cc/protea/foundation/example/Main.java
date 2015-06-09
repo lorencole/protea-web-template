@@ -1,6 +1,7 @@
 package cc.protea.foundation.example;
 
 import cc.protea.foundation.utility.ProfoundConfiguration;
+import cc.protea.foundation.utility.ProfoundConfiguration.Storage.Service;
 import cc.protea.foundation.utility.ProfoundServer;
 
 public class Main {
@@ -9,9 +10,11 @@ public class Main {
 
 		ProfoundConfiguration.systemEmails.defaultTemplate = "platform-email";
 		ProfoundConfiguration.publicUrl = "http://localhost.fieldraiser.com:8080";
-		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.example");
-		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.utility.example");
+		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.template.services");
 		ProfoundConfiguration.createSocialAccounts = true;
+
+		ProfoundConfiguration.storage.sessions = Service.DATABASE;
+		ProfoundConfiguration.storage.users = Service.DATABASE;
 
 		ProfoundServer.start();
 
