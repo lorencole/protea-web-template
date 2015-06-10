@@ -139,7 +139,7 @@ $.AdminLTE.options = {
  * functions and plugins as specified by the
  * options above.
  */
-$(function () {
+window.AdminLTEInit = function() {
   //Extend options if external options exist
   if (typeof AdminLTEOptions !== "undefined") {
     $.extend(true,
@@ -216,7 +216,9 @@ $(function () {
     });
 
   });
-});
+};
+
+$(window.AdminLTEInit);
 
 /* ----------------------------------
  * - Initialize the AdminLTE Object -

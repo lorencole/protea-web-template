@@ -1,0 +1,13 @@
+<script src="/adminLTE/AdminLTE.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+$('body').addClass('sidebar-mini').addClass('login-page');
+</script>
+
+<script>
+ko.computed(function() {
+	if (app.me() != null && window.AdminLTEInit) {
+		$(window.AdminLTEInit);
+	}
+});
+</script>

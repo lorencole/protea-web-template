@@ -20,7 +20,6 @@ Profound.Util.loadURL = function(url, container){
 	pageLocalScript = null;
 	container
 		.hide()
-//		.html('<h1><i class="fa fa-cog fa-spin"></i> Loading...</h1>')
 		.load(url, function(response, status, xhr) {
 			if ( status == "error" ) {
 				container.html('<h4 style="margin-top:10px; display:block; text-align:left"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>');
@@ -33,7 +32,6 @@ Profound.Util.loadURL = function(url, container){
 			}
 		    window.onresize();
 		})
-//		.fadeIn('fast');
 		.show()
 		;
 }

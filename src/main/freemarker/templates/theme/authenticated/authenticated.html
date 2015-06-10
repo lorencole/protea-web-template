@@ -11,11 +11,15 @@
 		var initialHash = window.location.hash;
 		window.onlogin = function() {
 			if (initialHash) {
+				console.log('Initial has was ' + initialHash + ' - resetting');
 				Profound.Util.setHash(initialHash);
+				initialHash = null;
 				delete initialHash;
 			} else {
+				console.log('Setting hash to index onlogin');
 				Profound.Util.setHash('index.html');
 			}
+			$(window.AdminLTEInit);
 		};
 	</script>
 
