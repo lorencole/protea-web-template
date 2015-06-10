@@ -13,8 +13,8 @@ public class Main {
 		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.template.services");
 		ProfoundConfiguration.createSocialAccounts = true;
 
-		ProfoundConfiguration.storage.sessions = Service.DATABASE;
-		ProfoundConfiguration.storage.users = Service.DATABASE;
+		ProfoundConfiguration.storage.sessions = Service.REDIS;
+		ProfoundConfiguration.storage.users = Service.REDIS;
 
 		ProfoundServer.start();
 
