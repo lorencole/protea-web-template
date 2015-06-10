@@ -2,30 +2,23 @@
      This file MUST include an element with the id profoundInnerPage for hash replacement to work.
      This would be a great place to define your window.onlogout() function to set the hash to something useful. -->
 
-<div class="container">
+<script>
+</script>
 
-	<div class="starter-template">
-		<h1>Welcome</h1>
-		<p class="lead">
-			This is a sample template shown when we don't recognize a user. This should be changed in your own application. 
-		</p>
-	</div>
-			
-	<div class="row">
-		<ul>
-		<li><a href="#login.html">Login Page</a></li>
-		<li><a href="#signup.html">Login Page</a></li>
-		</ul>
-	</div>
+<div class="login-page">
+	<div class="login-box">
 	
-	<div id="profoundInnerPage"></div>
-	
-	<div class="row">Some footer information could go here</div>
+		<div class="login-logo">
+			<a href="#"><b>Pro</b>found</a>
+		</div>
 
-	<script>
-	window.onlogout = function() {
-		Profound.Util.setHash('login.html');
-	}
-	</script>
+		<div id="profoundInnerPage"></div>
 
+	</div>
 </div>
+
+<script>
+window.onlogout = function() {
+	Profound.Util.setHash('login.html');
+}
+</script>

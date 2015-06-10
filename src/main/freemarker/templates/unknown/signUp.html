@@ -83,84 +83,57 @@
 
 }); </script>
 
-<div class="container" data-bind="with: page">
+<div class="login-box-body" data-bind="with: page">
 
-	<div class="omb_login">
-		<h3 class="omb_authTitle">
-			<a href="#login.html">Login</a> or Sign Up
-		</h3>
-
-		<div class="row omb_row-sm-offset-3 omb_loginOr">
-			<div class="col-xs-12 col-sm-6">
-				You can create a Market Alert account using one of these social networks:
-			</div>
-		</div>
-		
-		<div class="row omb_row-sm-offset-3 omb_socialButtons">
-			<div class="col-xs-4 col-sm-2">
-				<a href="#" class="btn btn-lg btn-block omb_btn-facebook" onclick="hello('facebook').login()"> <i class="fa fa-fw fa-facebook visible-xs"></i> <span class="hidden-xs">Facebook</span>
-				</a>
-			</div>
-			<div class="col-xs-4 col-sm-2">
-				<a href="#" class="btn btn-lg btn-block omb_btn-twitter" onclick="hello('twitter').login()"> <i class="fa fa-fw fa-twitter visible-xs"></i> <span class="hidden-xs">Twitter</span>
-				</a>
-			</div>
-			<div class="col-xs-4 col-sm-2">
-				<a href="#" class="btn btn-lg btn-block omb_btn-google" onclick="hello('google').login()"> <i class="fa fa-fw fa-google-plus visible-xs"></i> <span class="hidden-xs">Google+</span>
-				</a>
-			</div>
-		</div>
-
-		<div class="row omb_row-sm-offset-3 omb_loginOr">
-			<div class="col-xs-12 col-sm-6">
-				<hr class="omb_hrOr">
-				<span class="omb_spanOr">or</span>
-			</div>
-		</div>
-
-		<div class="row omb_row-sm-offset-3">
-			<div class="col-xs-12 col-sm-6">
-				<form class="omb_loginForm" action="" autocomplete="off">
-				
-					<div class="input-group">
-						<span class="input-group-addon" data-bind="css: { validationMessage : firstName.isModified() && ! firstName.isValid() }"><i class="fa fa-fw fa-user"></i></span> <input data-bind="textInput: firstName" type="text" class="form-control" name="firstName" placeholder="first name">
-					</div>
-					<span class="help-block"></span>
-
-					<div class="input-group">
-						<span class="input-group-addon" data-bind="css: { validationMessage : lastName.isModified() && ! lastName.isValid() }"><i class="fa fa-fw fa-user"></i></span> <input data-bind="textInput: lastName" type="text" class="form-control" name="lastName" placeholder="last name">
-					</div>
-					<span class="help-block"></span>
-
-					<div class="input-group">
-						<span class="input-group-addon" data-bind="css: { validationMessage : emailAddress.isModified() && ! emailAddress.isValid() }"><i class="fa fa-fw fa-envelope"></i></span> <input data-bind="textInput: emailAddress" type="text" class="form-control" name="username" placeholder="email address">
-					</div>
-					<span class="help-block"></span>
-
-					<div class="input-group" style="margin-bottom: 10px">
-						<span class="input-group-addon" data-bind="css: { validationMessage : password.isModified() && ! password.isValid() }"><i class="fa fa-fw fa-lock"></i></span> <input data-bind="textInput: password" type="password" class="form-control" name="password" placeholder="Password">
-					</div>
-
-					<!-- ko if: passwordStrength() -->
-					<div class="progress"  style="margin-bottom: 10px" >
-						<div class="progress-bar" role="progressbar"data-bind="style: { width: passwordStrength().percentage }, css: 'progress-bar-' + passwordStrength().color ">
-							<span data-bind="text: passwordStrength().message"></span>
-						</div>
-					</div>
-					<!-- /ko -->
-
-					<div class="input-group">
-						<span class="input-group-addon" data-bind="css: { validationMessage : confirm.isModified() && ! confirm.isValid() }"><i class="fa fa-fw fa-lock"></i></span> <input data-bind="textInput: confirm" type="password" class="form-control" name="confirm" placeholder="Confirm Password">
-					</div>
-					
-					<span class="help-block" data-bind="text: message"></span>
-
-					<button class="btn btn-lg btn-primary btn-block" type="submit" data-bind="click: signUp, css: { invalid: ! isValid() }">Register</button>
-				</form>
-			</div>
-		</div>
+	<p class="login-box-msg">Register a new membership</p>
+	
+	<div class="input-group form-group">
+		<span class="input-group-addon" data-bind="css: { validationMessage : firstName.isModified() && ! firstName.isValid() }"><i class="fa fa-fw fa-user"></i></span> <input data-bind="textInput: firstName" type="text" class="form-control" name="firstName" placeholder="first name">
 	</div>
 	
+	<div class="input-group form-group">
+		<span class="input-group-addon" data-bind="css: { validationMessage : lastName.isModified() && ! lastName.isValid() }"><i class="fa fa-fw fa-user"></i></span> <input data-bind="textInput: lastName" type="text" class="form-control" name="lastName" placeholder="last name">
+	</div>
+
+	<div class="input-group form-group">
+		<span class="input-group-addon" data-bind="css: { validationMessage : emailAddress.isModified() && ! emailAddress.isValid() }"><i class="fa fa-fw fa-envelope"></i></span> <input data-bind="textInput: emailAddress" type="text" class="form-control" name="username" placeholder="email address">
+	</div>
+
+	<div class="input-group form-group">
+		<span class="input-group-addon" data-bind="css: { validationMessage : password.isModified() && ! password.isValid() }"><i class="fa fa-fw fa-lock"></i></span> <input data-bind="textInput: password" type="password" class="form-control" name="password" placeholder="Password">
+	</div>
+
+	<!-- ko if: passwordStrength() -->
+	<div class="progress" style="margin-bottom: 10px" >
+		<div class="progress-bar" role="progressbar"data-bind="style: { width: passwordStrength().percentage }, css: 'progress-bar-' + passwordStrength().color ">
+			<span data-bind="text: passwordStrength().message"></span>
+		</div>
+	</div>
+	<!-- /ko -->
+
+	<div class="input-group form-group">
+		<span class="input-group-addon" data-bind="css: { validationMessage : confirm.isModified() && ! confirm.isValid() }"><i class="fa fa-fw fa-lock"></i></span> <input data-bind="textInput: confirm" type="password" class="form-control" name="confirm" placeholder="Confirm Password">
+	</div>
+	
+	<span class="login-box-msg warning" data-bind="text: message"></span>
+
+	<div class="row">
+		<div class="col-xs-8">
+		</div>
+		<div class="col-xs-4">
+			<button type="submit" class="btn btn-primary btn-block btn-flat" data-bind="click: login, css: { invalid: ! isValid() }">Register</button>
+		</div>
+	</div>
+
+	<div class="social-auth-links text-center">
+		<p>- OR -</p>
+		<a href="#" onclick="hello('facebook').login()" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
+		<a href="#" onclick="hello('twitter').login()" class="btn btn-block btn-social btn-twitter btn-flat"><i class="fa fa-twitter"></i> Sign up using Twitter</a>
+		<a href="#" onclick="hello('google').login()" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i>Sign up using Google</a>
+	</div>
+
+	<a href="#login.html" class="text-center">I already have a membership</a>
+
 </div>
 
 </@page>

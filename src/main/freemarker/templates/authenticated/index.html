@@ -2,15 +2,18 @@
 
 <script>
 loadPageScript(function(page) {
+
+	page.counter = ko.observable(0);
 	
 	page.onload = function() {
-	}
+		page.counter(page.counter() + 1);
+	};
 	
 });
 </script>
 
 <@widget title="This is a box" icon="tag">
-It has an icon, and content too.
+It has an icon, and content too. It has been displayed <span data-bind="text: page.counter"></span> times since the last full reload.
 </@widget>
 
 <@widget title="This is a box" color="primary">
