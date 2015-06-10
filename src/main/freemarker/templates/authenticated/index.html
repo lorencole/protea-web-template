@@ -2,8 +2,6 @@
 
 <script>
 loadPageScript(function(page) {
-
-	
 	
 	page.onload = function() {
 	}
@@ -11,5 +9,18 @@ loadPageScript(function(page) {
 });
 </script>
 
+<@widget title="This is a box" icon="tag">
+It has an icon, and content too.
+</@widget>
+
+<@widget title="This is a box" color="primary">
+Here's another box with some color
+</@widget>
+
+<div class="row">
+	<div class="col-md-6">
+		<@widget title="Half width"> Boxes can live inside the bootstrap grid </@widget>
+	</div>
+</div>
 
 </@page>

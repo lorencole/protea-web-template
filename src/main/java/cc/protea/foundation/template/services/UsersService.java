@@ -14,6 +14,8 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang3.StringUtils;
 
 import cc.protea.foundation.model.ProteaException;
+import cc.protea.foundation.template.model.TemplateUser;
+import cc.protea.foundation.util.GravatarUtil;
 import cc.protea.foundation.utility.ProteaUser;
 import cc.protea.foundation.utility.SessionUtil;
 import cc.protea.foundation.utility.UserUtil;
@@ -34,10 +36,13 @@ public class UsersService extends ProteaService {
 
 	@GET
 	@Path("/current")
-	@ApiOperation(value = "Get the current user", response = ProteaUser.class)
+	@ApiOperation(value = "Get the current user", response = TemplateUser.class)
 	@RolesAllowed("loggedIn")
-	public ProteaUser current() {
-		ProteaUser user = UserUtil.getProteaUser(getUserId());
+	public TemplateUser current() {
+		TemplateUser user = new TemplateUser();
+		user.id = getUserId();
+		UserUtil.fillProteaUser(user);
+		user.profilePictureUrl = GravatarUtil.getImageUrl(user.emailAddress, 200);
 		return user;
 	}
 

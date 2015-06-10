@@ -1,4 +1,5 @@
-<#include "internal/internal-page.ftl.html">
+<#include "internal-page.ftl.html">
 <#if pp.sourceDirectory == 'authenticated/' || pp.sourceDirectory == 'unknown/'>
-<#include "${pp.sourceDirectory}/${pp.sourceDirectory?remove_ending('/')}_page.html">
+<#include "../theme/${pp.sourceDirectory}${pp.sourceDirectory?remove_ending('/')}-lib.html" ignore_missing=true>
+<#include "../theme/${pp.sourceDirectory}${pp.sourceDirectory?remove_ending('/')}-page.html">
 </#if>

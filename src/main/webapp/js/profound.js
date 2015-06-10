@@ -167,6 +167,11 @@ Profound.App = function() {
 		}
 		console.log("Loading current user for session token " + localStorage.sessionToken);
 		self.syncAjax('GET', '/api/users/current', null, function(data) {
+			if (data) {
+				if (! data.name) {
+					data.name = data.firstName + ' ' + data.lastName;
+				}
+			}
 			self.me(data);
 			console.log("Current user loaded");
 			if (window.onlogin) {
