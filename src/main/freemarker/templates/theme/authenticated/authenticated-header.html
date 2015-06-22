@@ -111,7 +111,7 @@
               <img data-bind="attr : {src: me().profilePictureUrl}" class="img-circle" alt="User Image" />
               <p>
                 <span data-bind="text: me().name"></span>
-                <small>Member since Nov. 2012</small>
+                <small>Member since <span data-bind="text: moment(app.me().createdOn).format('MMM YYYY');"></span></small>
               </p>
             </li>
             <!-- Menu Body -->

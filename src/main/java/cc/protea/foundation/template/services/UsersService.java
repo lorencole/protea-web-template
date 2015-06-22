@@ -42,7 +42,7 @@ public class UsersService extends ProteaService {
 		TemplateUser user = new TemplateUser();
 		user.id = getUserId();
 		UserUtil.fillProteaUser(user);
-		user.profilePictureUrl = GravatarUtil.getImageUrl(user.emailAddress, 200);
+		user.profilePictureUrl = GravatarUtil.getImageUrl(user.primaryEmail, 200);
 		return user;
 	}
 
