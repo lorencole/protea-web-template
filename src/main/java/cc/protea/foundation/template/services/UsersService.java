@@ -40,9 +40,6 @@ public class UsersService extends ProteaService {
 	@ApiOperation(value = "Get the current user", response = TemplateUser.class)
 	@RolesAllowed("loggedIn")
 	public TemplateUser current() {
-//		TemplateUser user = new TemplateUser();
-//		user.id = getUserId();
-//		UserUtil.fillProteaUser(user);
 		TemplateUser user = DatabaseUtil.get(h -> {
 			return UserUtil.getProteaUser(h, getUserId());
 		});
@@ -69,8 +66,8 @@ public class UsersService extends ProteaService {
 		}
 		// Next, let's check to see if there's an account with that email address
 		if (request.emailAddress != null) {
-			Integer id = UserUtil.getUserIdByEmail(request.emailAddress);
 			ProteaUser user = DatabaseUtil.get( h -> {
+				Integer id = UserUtil.getUserIdByEmail(h, request.emailAddress);
 				return UserUtil.getProteaUser(h, id);
 			});
 			if (user != null) {

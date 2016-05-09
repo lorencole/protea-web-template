@@ -1,5 +1,6 @@
 package cc.protea.foundation.example;
 
+import cc.protea.foundation.template.model.TemplateUser;
 import cc.protea.foundation.utility.ProfoundConfiguration;
 import cc.protea.foundation.utility.ProfoundConfiguration.Storage.Service;
 import cc.protea.foundation.utility.ProfoundServer;
@@ -14,8 +15,8 @@ public class Main {
 		ProfoundConfiguration.createSocialAccounts = true;
 
 		ProfoundConfiguration.storage.sessions = Service.REDIS;
-		ProfoundConfiguration.storage.users = Service.REDIS;
-
+		System.setProperty("USER_CLASS_NAME", TemplateUser.class.getName());
+		
 		ProfoundServer.start();
 
 	}
