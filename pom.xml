@@ -5,7 +5,7 @@
 
 	<groupId>cc.protea.foundation</groupId>
 	<artifactId>template</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>template</name>
@@ -39,6 +39,19 @@
 		</developer>
 	</developers>
 
+	<repositories>
+		<repository>
+			<id>sonatype-oss-public</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -55,7 +68,7 @@
 		<dependency>
 			<groupId>cc.protea.platform</groupId>
 			<artifactId>platform</artifactId>
-			<version>[0.2,)</version>
+			<version>0.4-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
@@ -137,4 +150,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>

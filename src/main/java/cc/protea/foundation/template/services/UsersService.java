@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cc.protea.foundation.integrations.DatabaseUtil;
 import cc.protea.foundation.model.ProteaException;
 import cc.protea.foundation.template.model.TemplateUser;
 import cc.protea.foundation.util.GravatarUtil;
@@ -39,9 +40,9 @@ public class UsersService extends ProteaService {
 	@ApiOperation(value = "Get the current user", response = TemplateUser.class)
 	@RolesAllowed("loggedIn")
 	public TemplateUser current() {
-		TemplateUser user = new TemplateUser();
-		user.id = getUserId();
-		UserUtil.fillProteaUser(user);
+		TemplateUser user = DatabaseUtil.get(h -> {
+			return UserUtil.getProteaUser(h, getUserId());
+		});
 		user.profilePictureUrl = GravatarUtil.getImageUrl(user.primaryEmail, 200);
 		return user;
 	}
@@ -65,7 +66,10 @@ public class UsersService extends ProteaService {
 		}
 		// Next, let's check to see if there's an account with that email address
 		if (request.emailAddress != null) {
-			ProteaUser user = UserUtil.getProteaUser(UserUtil.getUserIdByEmail(request.emailAddress));
+			ProteaUser user = DatabaseUtil.get( h -> {
+				Integer id = UserUtil.getUserIdByEmail(h, request.emailAddress);
+				return UserUtil.getProteaUser(h, id);
+			});
 			if (user != null) {
 				response.message = "The user " + request.emailAddress + " already exists; please login with your ";
 				if (user.authentication.facebook) {
