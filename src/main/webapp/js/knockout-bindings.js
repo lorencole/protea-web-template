@@ -73,6 +73,105 @@ ko.bindingHandlers.summernote = {
 	}
 };
 
+ko.bindingHandlers.dropfile = {
+	init: function (element, valueAccessor) {
+		var value = ko.utils.unwrapObservable(valueAccessor());
+		if (!value) {
+			value = {};
+		}
+		if (value.name === undefined) {
+			value.name = ko.observable();
+		}
+		if (value.size === undefined) {
+			value.size = ko.observable();
+		}
+		if (value.type === undefined) {
+			value.type = ko.observable();
+		}
+		if (value.data === undefined) {
+			value.data = ko.observable();
+		}
+
+		// Check for FileReader or Silverlight
+		if (!window.dropfile) {
+			element.innerHTML = "Unfortunately this browser doesn't support FileReader or the shim. " + (!Silverlight.isInstalled() ? "<br/><b><a href='https://www.microsoft.com/getsilverlight/'>Please install Silverlight to upload images</a></b>" : "");
+		}
+
+		element.ondragover = function () {
+			return false;
+		};
+		element.ondragenter = function () {
+			return false;
+		};
+		element.ondrop = function (e) {
+
+			// ensure that we listen out for the window event
+			e = e || window.event;
+
+			// And that for the fix to work we accept `e.files`
+			var files = (e.files || e.dataTransfer.files)
+				, file = files[0];
+
+			if (!file) {
+				if (ko.isObservable(value.name)) {
+					value.name(null);
+				} else {
+					value.name = null;
+				}
+				if (ko.isObservable(value.size)) {
+					value.size(null);
+				} else {
+					value.size = null;
+				}
+				if (ko.isObservable(value.type)) {
+					value.type(null);
+				} else {
+					value.type = null;
+				}
+				if (ko.isObservable(value.data)) {
+					value.data(null);
+				} else {
+					value.data = null;
+				}
+			} else {
+				if (ko.isObservable(value.name)) {
+					value.name(file.name);
+				} else {
+					value.name = file.name;
+				}
+				if (ko.isObservable(value.size)) {
+					value.size(file.size);
+				} else {
+					value.size = file.size;
+				}
+				if (ko.isObservable(value.type)) {
+					value.type(file.type);
+				} else {
+					value.type = file.type;
+				}
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					if (ko.isObservable(value.data)) {
+						value.data(e.target.result.substring(e.target.result.indexOf(",") + 1));
+					} else {
+						value.data = e.target.result.substring(e.target.result.indexOf(",") + 1);
+					}
+				};
+				reader.readAsDataURL(file);
+			}
+
+			this.innerHTML = '<p>' + (file.name) + '</p>';
+
+			if (page.fileSave)
+				page.fileSave();
+
+
+			return false;
+		};
+
+	}
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 // Output bindings
 ////////////////////////////////////////////////////////////////////////////////
