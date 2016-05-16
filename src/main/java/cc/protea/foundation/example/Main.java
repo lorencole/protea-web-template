@@ -15,7 +15,7 @@ public class Main {
 		ProfoundConfiguration.createSocialAccounts = true;
 
 		ProfoundConfiguration.storage.sessions = Service.REDIS;
-		System.setProperty("USER_CLASS_NAME", TemplateUser.class.getName());
+		ProfoundConfiguration.userClass = TemplateUser.class;
 		
 		ProfoundServer.start();
 
