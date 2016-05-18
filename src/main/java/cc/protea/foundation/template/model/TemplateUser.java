@@ -31,6 +31,10 @@ public class TemplateUser extends ProteaUser {
 	@Override
 	public void update(Handle h, String additionalFields) {
 		TemplateUser template = JsonUtil.fromJson(additionalFields, TemplateUser.class);
+		if(template == null) {
+			super.update(h, additionalFields);
+			return;
+		} 
 		h.createStatement("UPDATE " + getTableName() + " SET "
 				+ " profile_picture_url = :profilePictureUrl"
 				+ " WHERE user_key = :userKey")
