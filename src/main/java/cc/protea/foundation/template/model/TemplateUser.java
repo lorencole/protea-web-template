@@ -32,7 +32,6 @@ public class TemplateUser extends ProteaUser {
 	public void update(Handle h, String additionalFields) {
 		TemplateUser template = JsonUtil.fromJson(additionalFields, TemplateUser.class);
 		if(template == null) {
-			super.update(h, additionalFields);
 			return;
 		} 
 		h.createStatement("UPDATE " + getTableName() + " SET "
