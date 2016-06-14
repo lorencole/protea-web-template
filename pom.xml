@@ -4,15 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cc.protea.foundation</groupId>
-	<artifactId>template</artifactId>
+	<artifactId>react-template</artifactId>
 	<version>0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>template</name>
+	<name>react-template</name>
 	<url>http://maven.apache.org</url>
 
 	<issueManagement>
-		<url>https://github.com/protea/protea-web-template/issues</url>
+		<url>https://github.com/lorencole/protea-web-template-react/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
@@ -25,9 +25,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/protea/protea-web-template</url>
-		<connection>scm:git:git://github.com/protea/protea-web-template.git</connection>
-		<developerConnection>scm:git:git@github.com:protea/protea-web-template.git</developerConnection>
+		<url>https://github.com/lorencole/protea-web-template-react</url>
+		<connection>scm:git:git://github.com/protea/protea-web-template-react.git</connection>
+		<developerConnection>scm:git:git@github.com:protea/protea-web-template-react.git</developerConnection>
 	</scm>
 
 	<developers>
@@ -36,6 +36,12 @@
 			<name>Richard Stanford</name>
 			<url>https://github.com/rjstanford</url>
 			<id>rjstanford</id>
+		</developer>
+		<developer>
+			<email>loren@ladybirdsoftware.com</email>
+			<name>lorencole</name>
+			<url>https://github.com/lorencole</url>
+			<id>lorencole</id>
 		</developer>
 	</developers>
 
@@ -150,5 +156,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
