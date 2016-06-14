@@ -136,24 +136,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<configuration>
-					<cfgFile>src/main/freemarker/config.fmpp</cfgFile>
-					<outputDirectory>src/main/webapp/</outputDirectory>
-					<templateDirectory>src/main/freemarker/templates/</templateDirectory>
-				</configuration>
-				<groupId>com.googlecode.fmpp-maven-plugin</groupId>
-				<artifactId>fmpp-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 
