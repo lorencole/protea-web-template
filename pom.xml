@@ -137,7 +137,7 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<!-- Build the front end -->
+				<!-- Build the front end  -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.5.0</version>
@@ -154,9 +154,9 @@
 					<executable>npm</executable>
 					<arguments>
 						<argument>run</argument>
-						<argument>build</argument>
+						<argument>maven_build</argument>
 					</arguments>
-					<workingDirectory>webapp</workingDirectory>
+<!-- 					<workingDirectory>webapp</workingDirectory> -->
 				</configuration>
 			</plugin>
 		</plugins>
