@@ -156,7 +156,7 @@
 						<argument>run</argument>
 						<argument>build</argument>
 					</arguments>
-					<workingDirectory>/home/parallels/git/protea-web-template-react/webapp</workingDirectory>
+					<workingDirectory>webapp</workingDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
