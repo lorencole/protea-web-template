@@ -136,6 +136,29 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<!-- Build the front end -->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<id>some-execution</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>npm</executable>
+					<arguments>
+						<argument>run</argument>
+						<argument>build</argument>
+					</arguments>
+					<workingDirectory>/home/parallels/git/protea-web-template-react/webapp</workingDirectory>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

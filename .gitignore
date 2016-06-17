@@ -4,6 +4,7 @@
 /.classpath
 /.idea/
 .DS_Store
-/webapp/node_modules
-/webapp/bundle.js
-/webapp/npm-debug.log
+node_modules/
+bundle.js
+npm-debug.log
+*~
