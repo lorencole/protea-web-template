@@ -11,34 +11,34 @@ import cc.protea.foundation.utility.ProteaUser;
 public class TemplateUser extends ProteaUser {
 
 	public String profilePictureUrl;
-	
-	public String getTableName() {
-		return "template_user";
-	}
-
-	@Override
-	public UserMapper<TemplateUser> mapper() {
-		UserMapper<TemplateUser> mapper = new ProteaUser.UserMapper<TemplateUser>() {
-			@Override
-			public TemplateUser extend(TemplateUser u, final ResultSet rs) {
-				u.profilePictureUrl = DatabaseUtil.getString(rs, "profilePictureUrl");
-				return u;
-			}
-		};
-		return mapper;
-	}
-	
-	@Override
-	public void update(Handle h, String additionalFields) {
-		TemplateUser template = JsonUtil.fromJson(additionalFields, TemplateUser.class);
-		if(template == null) {
-			return;
-		} 
-		h.createStatement("UPDATE " + getTableName() + " SET "
-				+ " profile_picture_url = :profilePictureUrl"
-				+ " WHERE user_key = :userKey")
-			.bind("profilePictureUrl", template.profilePictureUrl)
-			.bind("userKey", this.id)
-			.execute();
-	}
+//	TODO: Make this compatible with changes to ProteaUser
+//	public String getTableName() {
+//		return "template_user";
+//	}
+//
+//	@Override
+//	public UserMapper<TemplateUser> mapper() {
+//		UserMapper<TemplateUser> mapper = new ProteaUser.UserMapper<TemplateUser>() {
+//			@Override
+//			public TemplateUser extend(TemplateUser u, final ResultSet rs) {
+//				u.profilePictureUrl = DatabaseUtil.getString(rs, "profilePictureUrl");
+//				return u;
+//			}
+//		};
+//		return mapper;
+//	}
+//	
+//	@Override
+//	public void update(Handle h, String additionalFields) {
+//		TemplateUser template = JsonUtil.fromJson(additionalFields, TemplateUser.class);
+//		if(template == null) {
+//			return;
+//		} 
+//		h.createStatement("UPDATE " + getTableName() + " SET "
+//				+ " profile_picture_url = :profilePictureUrl"
+//				+ " WHERE user_key = :userKey")
+//			.bind("profilePictureUrl", template.profilePictureUrl)
+//			.bind("userKey", this.id)
+//			.execute();
+//	}
 }

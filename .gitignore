@@ -2,8 +2,8 @@
 /.settings/
 /.project
 /.classpath
-/src/main/webapp/*.html
-/src/main/webapp/authenticated
-/src/main/webapp/theme
-/src/main/webapp/unknown
 /.idea/
+.DS_Store
+/webapp/node_modules
+/webapp/bundle.js
+/webapp/npm-debug.log
