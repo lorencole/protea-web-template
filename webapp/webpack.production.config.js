@@ -1,6 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
+var WebpackStripLoader = require('strip-loader');
+
+var stripLoader = {
+ test: [/\.js$/, /\.es6$/],
+ exclude: /node_modules/,
+ loader: WebpackStripLoader.loader('console.log')
+}
 
 module.exports = {
 	entry: [
@@ -14,6 +21,6 @@ module.exports = {
 		extensions: ['', '.js', '.jsx']
 	},
 	module: {
-		loaders: loaders
+		loaders: [loaders, stripLoader]
 	}
 };
