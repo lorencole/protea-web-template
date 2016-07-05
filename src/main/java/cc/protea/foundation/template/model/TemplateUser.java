@@ -5,40 +5,46 @@ import java.sql.ResultSet;
 import org.skife.jdbi.v2.Handle;
 
 import cc.protea.foundation.integrations.DatabaseUtil;
-import cc.protea.foundation.integrations.JsonUtil;
-import cc.protea.foundation.utility.ProteaUser;
+import cc.protea.platform.ProteaUser;
 
 public class TemplateUser extends ProteaUser {
 
 	public String profilePictureUrl;
-//	TODO: Make this compatible with changes to ProteaUser
-//	public String getTableName() {
-//		return "template_user";
+	
+	public String getUserTableName() {
+		return "template_user";
+	}
+
+	@Override
+	public void update(Handle h) {
+		super.update(h);
+		h.createStatement("update template_user set" +
+				" user_key = user_key, " +
+				" profile_picture_url = :profilePictureUrl " +
+				" where user_key = :id")
+				.bind("profilePictureUrl", profilePictureUrl)
+				.bind("id", id)
+				.execute();
+	}
+
+	@Override
+	public Mapper<TemplateUser> mapper() {
+		return mapper;
+	}
+
+	public static Mapper<TemplateUser> mapper = new ProteaUser.Mapper<TemplateUser> () {
+		@Override
+		public void fill(TemplateUser out, final ResultSet rs) {
+			super.fill(out, rs);
+			out.profilePictureUrl = DatabaseUtil.getString(rs, "profile_picture_url");
+		}
+	};
+
+//	public void delete(Handle h) {
+//		// no-op
 //	}
 //
-//	@Override
-//	public UserMapper<TemplateUser> mapper() {
-//		UserMapper<TemplateUser> mapper = new ProteaUser.UserMapper<TemplateUser>() {
-//			@Override
-//			public TemplateUser extend(TemplateUser u, final ResultSet rs) {
-//				u.profilePictureUrl = DatabaseUtil.getString(rs, "profilePictureUrl");
-//				return u;
-//			}
-//		};
-//		return mapper;
-//	}
-//	
-//	@Override
-//	public void update(Handle h, String additionalFields) {
-//		TemplateUser template = JsonUtil.fromJson(additionalFields, TemplateUser.class);
-//		if(template == null) {
-//			return;
-//		} 
-//		h.createStatement("UPDATE " + getTableName() + " SET "
-//				+ " profile_picture_url = :profilePictureUrl"
-//				+ " WHERE user_key = :userKey")
-//			.bind("profilePictureUrl", template.profilePictureUrl)
-//			.bind("userKey", this.id)
-//			.execute();
+//	public void insert(Handle h) {
+//		// no-op
 //	}
 }

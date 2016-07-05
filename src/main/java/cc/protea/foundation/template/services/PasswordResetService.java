@@ -10,15 +10,15 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 
-import cc.protea.foundation.utility.services.GenericResponse;
-import cc.protea.foundation.utility.services.ProteaService;
-import cc.protea.foundation.utility.services.passwordReset.PasswordResetController;
-import cc.protea.foundation.utility.services.passwordReset.PasswordResetRequest;
-import cc.protea.foundation.utility.services.passwordReset.PasswordResetValidateResponse;
-
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+
+import cc.protea.platform.services.GenericResponse;
+import cc.protea.platform.services.ProteaService;
+import cc.protea.platform.services.passwordReset.PasswordResetController;
+import cc.protea.platform.services.passwordReset.PasswordResetRequest;
+import cc.protea.platform.services.passwordReset.PasswordResetValidateResponse;
 
 @Api(value = "/passwords", description = "Password Services")
 @Path("/passwords")

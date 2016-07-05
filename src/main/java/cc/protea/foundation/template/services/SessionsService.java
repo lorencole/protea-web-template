@@ -5,15 +5,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import cc.protea.foundation.utility.services.GenericResponse;
-import cc.protea.foundation.utility.services.ProteaService;
-import cc.protea.foundation.utility.services.login.AuthenticationRequest;
-import cc.protea.foundation.utility.services.login.AuthenticationResponse;
-import cc.protea.foundation.utility.services.login.SessionController;
-
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+
+import cc.protea.platform.services.GenericResponse;
+import cc.protea.platform.services.ProteaService;
+import cc.protea.platform.services.login.AuthenticationRequest;
+import cc.protea.platform.services.login.AuthenticationResponse;
+import cc.protea.platform.services.login.SessionController;
 
 @Path("/sessions")
 @Api(value = "/sessions", description = "Session Services")

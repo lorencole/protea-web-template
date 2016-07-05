@@ -4,17 +4,17 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 
 import cc.protea.foundation.ProteaFoundation;
 import cc.protea.foundation.template.model.TemplateUser;
-import cc.protea.foundation.utility.ProfoundConfiguration;
-import cc.protea.foundation.utility.ProfoundConfiguration.Storage.Service;
-import cc.protea.foundation.utility.ProfoundServer;
+import cc.protea.platform.ProfoundConfiguration;
+import cc.protea.platform.ProfoundServer;
+import cc.protea.platform.ProfoundConfiguration.Storage.Service;
 
 public class Main {
 
 	public static void main(final String[] args) throws Exception {
 
 		ProfoundConfiguration.systemEmails.defaultTemplate = "platform-email";
-		//ProfoundConfiguration.publicUrl = "http://localhost:8080";
 		ProfoundConfiguration.publicUrl = "http://protea-web-template.herokuapp.com/";
+		//ProfoundConfiguration.publicUrl = "http://localhost:8080";
 		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.template.services");
 		ProfoundConfiguration.createSocialAccounts = true;
 
