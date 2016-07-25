@@ -67,7 +67,7 @@ public class UsersService extends ProteaService {
 		// Next, let's check to see if there's an account with that email address
 		if (request.emailAddress != null) {
 			ProteaUser user = DatabaseUtil.get( h -> {
-				Integer id = UserUtil.getUserIdByEmail(h, request.emailAddress);
+				Long id = UserUtil.getUserIdByEmail(h, request.emailAddress);
 				return UserUtil.getProteaUser(h, id);
 			});
 			if (user != null) {
@@ -106,7 +106,7 @@ public class UsersService extends ProteaService {
 		if (request.name == null) {
 			request.name = response.getName();
 		}
-		Integer userId = UserUtil.add(request, response);
+		Long userId = UserUtil.add(request, response);
 		if (userId == null) {
 			throw new ProteaException("Could not create user");
 		}
