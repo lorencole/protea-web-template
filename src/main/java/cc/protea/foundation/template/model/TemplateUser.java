@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.skife.jdbi.v2.Handle;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cc.protea.foundation.integrations.DatabaseUtil;
 import cc.protea.platform.ProteaUser;
 import cc.protea.platform.UserUtil;
@@ -13,6 +15,7 @@ public class TemplateUser extends ProteaUser {
 
 	public String profilePictureUrl;
 	
+	@JsonIgnore
 	public String getUserTableName() {
 		return "template_user";
 	}
@@ -28,7 +31,7 @@ public class TemplateUser extends ProteaUser {
 		return DatabaseUtil.get(h -> selectAll(h));
 	}
 	public static List<TemplateUser> selectAll(Handle h) {
-		return h.createQuery("SELECT * FROM profound_user LEFT JOIN template_user ON template_user.id = profound_user.id")
+		return h.createQuery("SELECT * FROM profound_user LEFT JOIN template_user ON template_user.user_key = profound_user.user_key")
 			.map(TemplateUser.mapper)
 			.list();
 	}
@@ -50,6 +53,7 @@ public class TemplateUser extends ProteaUser {
 		return mapper;
 	}
 
+	@JsonIgnore
 	public static Mapper<TemplateUser> mapper = new ProteaUser.Mapper<TemplateUser> () {
 		@Override
 		public void fill(TemplateUser out, final ResultSet rs) {

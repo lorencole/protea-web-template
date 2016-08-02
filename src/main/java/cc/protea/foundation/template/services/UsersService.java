@@ -139,7 +139,9 @@ public class UsersService extends ProteaService<TemplateUser> {
 		Long id = KeyUtil.toKey(key);
 		TemplateUser user = DatabaseUtil.get(h -> {
 			TemplateUser u = TemplateUser.select(id);
-			u.fetchEmailAddresses();
+			if(u != null) {
+				u.fetchEmailAddresses();
+			}
 			return u;
 		});
 		

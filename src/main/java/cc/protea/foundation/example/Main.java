@@ -13,8 +13,8 @@ public class Main {
 	public static void main(final String[] args) throws Exception {
 
 		ProfoundConfiguration.systemEmails.defaultTemplate = "platform-email";
-		ProfoundConfiguration.publicUrl = "http://protea-web-template-react.herokuapp.com/";
-		//ProfoundConfiguration.publicUrl = "http://localhost:8080";
+		//ProfoundConfiguration.publicUrl = "http://protea-web-template-react.herokuapp.com/";
+		ProfoundConfiguration.publicUrl = "http://localhost:8080";
 		ProfoundConfiguration.servicePackages.add("cc.protea.foundation.template.services");
 		ProfoundConfiguration.createSocialAccounts = true;
 
