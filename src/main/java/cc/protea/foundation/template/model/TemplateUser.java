@@ -1,11 +1,13 @@
 package cc.protea.foundation.template.model;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 import org.skife.jdbi.v2.Handle;
 
 import cc.protea.foundation.integrations.DatabaseUtil;
 import cc.protea.platform.ProteaUser;
+import cc.protea.platform.UserUtil;
 
 public class TemplateUser extends ProteaUser {
 
@@ -15,6 +17,22 @@ public class TemplateUser extends ProteaUser {
 		return "template_user";
 	}
 
+	public static TemplateUser select(Long id) {
+		return DatabaseUtil.get(h -> select(h, id));
+	}
+	public static TemplateUser select(Handle h, Long id) {
+		return UserUtil.getProteaUser(h, id);
+	}
+	
+	public static List<TemplateUser> selectAll() {
+		return DatabaseUtil.get(h -> selectAll(h));
+	}
+	public static List<TemplateUser> selectAll(Handle h) {
+		return h.createQuery("SELECT * FROM profound_user LEFT JOIN template_user ON template_user.id = profound_user.id")
+			.map(TemplateUser.mapper)
+			.list();
+	}
+	
 	@Override
 	public void update(Handle h) {
 		super.update(h);
@@ -40,11 +58,17 @@ public class TemplateUser extends ProteaUser {
 		}
 	};
 
-//	public void delete(Handle h) {
-//		// no-op
-//	}
-//
-//	public void insert(Handle h) {
-//		// no-op
-//	}
+	public void delete() {
+		if(this.id == null) {
+			return;
+		}
+		UserUtil.remove(id);
+		DatabaseUtil.transaction(h -> {
+			h.execute("DELETE FROM " + getUserTableName() + " WHERE user_key = ?", id);
+		});
+	}
+
+	public void insert(Handle h) {
+		// no-op use UserUtil instead
+	}
 }

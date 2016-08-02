@@ -1,5 +1,6 @@
 package cc.protea.foundation.template.services;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
@@ -7,16 +8,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+
 import cc.protea.foundation.integrations.DatabaseUtil;
 import cc.protea.foundation.model.ProteaException;
 import cc.protea.foundation.template.model.TemplateUser;
 import cc.protea.foundation.util.GravatarUtil;
+import cc.protea.foundation.util.KeyUtil;
 import cc.protea.platform.ProteaUser;
 import cc.protea.platform.SessionUtil;
 import cc.protea.platform.UserUtil;
@@ -26,14 +33,10 @@ import cc.protea.platform.services.login.AuthenticationController;
 import cc.protea.platform.services.login.AuthenticationRequest;
 import cc.protea.platform.services.login.AuthenticationResponse;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-
 @Path("/users")
 @Api(value = "/users", description = "User Services")
 @Produces(MediaType.APPLICATION_JSON)
-public class UsersService extends ProteaService {
+public class UsersService extends ProteaService<TemplateUser> {
 
 	@GET
 	@Path("/current")
@@ -43,7 +46,7 @@ public class UsersService extends ProteaService {
 		TemplateUser user = DatabaseUtil.get(h -> {
 			return UserUtil.getProteaUser(h, getUserId());
 		});
-		user.profilePictureUrl = GravatarUtil.getImageUrl(user.primaryEmail, 200);
+		user.profilePictureUrl = GravatarUtil.getImageUrl(user.correspondenceEmailAddress, 200);
 		return user;
 	}
 
@@ -119,7 +122,7 @@ public class UsersService extends ProteaService {
 	@RolesAllowed("loggedIn")
 	public GenericResponse updatePassword(@ApiParam(name = "password", required = true) final String password) {
 		ProteaUser user = getUser();
-		if (user == null || StringUtils.isBlank(user.emailAddress)) {
+		if (user == null || StringUtils.isBlank(user.correspondenceEmailAddress)) {
 			throw new ProteaException(Status.BAD_REQUEST, "Email address is required");
 		}
 		if (StringUtils.isBlank(password)) {
@@ -128,5 +131,69 @@ public class UsersService extends ProteaService {
 		UserUtil.setPassword(getUserId(), password);
 		return GenericResponse.success();
 	}
+	
+	@GET
+	@Path("/{key}")
+	@ApiOperation(value = "Get a user by their id", response = TemplateUser.class)
+	public TemplateUser get(@PathParam("key") String key) {
+		Long id = KeyUtil.toKey(key);
+		TemplateUser user = DatabaseUtil.get(h -> {
+			TemplateUser u = TemplateUser.select(id);
+			u.fetchEmailAddresses();
+			return u;
+		});
+		
+		if(user == null) {
+			throw new ProteaException("User not found");
+		}
+		
+		return user;
+	}
+	
+	@GET
+	@Path("/{key}/roles")
+	@ApiOperation(value = "List all roles assigned to a user")
+	public Set<String> getUserRoles(@PathParam("key") String key) {
+		Long id = KeyUtil.toKey(key);
+		return UserUtil.getUserRoles(id);
+	}
+	
+	@GET
+	@Path("/list")
+	@ApiOperation(value = "Get all users")
+	public List<TemplateUser> list() {
+		return TemplateUser.selectAll();
+	}
+	
+	// TODO: Search
+	
+	@GET
+	@Path("/list/{role}")
+	@ApiOperation(value = "List all users in a role")
+	public Set<TemplateUser> listUsersInRole(@PathParam("role") String role) {
+		Set<Long> userIds = UserUtil.getUserIdsInRole(role);
+		return UserUtil.getProteaUsers(userIds);
+	}
+	
+	@PUT
+	@Path("/{key}")
+	public GenericResponse update(@PathParam("key") String key, @ApiParam(required=true) TemplateUser user) {
+		user.id = KeyUtil.toKey(key);
+		user.update();
+		return GenericResponse.success();
+	}
+	
+	@PUT
+	@Path("/{key}/roles")
+	@ApiOperation(value = "Update user roles")
+	public GenericResponse update(@PathParam("key") String key, @ApiParam(required=true) Set<String> roles) {
+		Long userId = KeyUtil.toKey(key);
+		UserUtil.removeAllRoles(userId);
+		for(String role : roles) {
+			UserUtil.addRole(userId, role);
+		}
+		return GenericResponse.success();
+	}
 
+	
 }
