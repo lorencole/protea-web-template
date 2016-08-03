@@ -9,6 +9,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
+import cc.protea.foundation.template.model.TemplateUser;
 import cc.protea.platform.services.GenericResponse;
 import cc.protea.platform.services.ProteaService;
 import cc.protea.platform.services.login.AuthenticationRequest;
@@ -18,7 +19,7 @@ import cc.protea.platform.services.login.SessionController;
 @Path("/sessions")
 @Api(value = "/sessions", description = "Session Services")
 @Produces(MediaType.APPLICATION_JSON)
-public class SessionsService extends ProteaService {
+public class SessionsService extends ProteaService<TemplateUser> {
 
 	@POST
 	@Path("/login")
