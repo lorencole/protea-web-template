@@ -169,14 +169,6 @@ public class UsersService extends ProteaService<TemplateUser> {
 	
 	// TODO: Search
 	
-	@GET
-	@Path("/list/{role}")
-	@ApiOperation(value = "List all users in a role")
-	public Set<TemplateUser> listUsersInRole(@PathParam("role") String role) {
-		Set<Long> userIds = UserUtil.getUserIdsInRole(role);
-		return UserUtil.getProteaUsers(userIds);
-	}
-	
 	@PUT
 	@Path("/{key}")
 	public GenericResponse update(@PathParam("key") String key, @ApiParam(required=true) TemplateUser user) {
