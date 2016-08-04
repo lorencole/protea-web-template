@@ -119,6 +119,7 @@ public class UsersService extends ProteaService<TemplateUser> {
 
 	@PUT
 	@Path("/setPassword")
+	@ApiOperation(value = "Update a user")
 	@RolesAllowed("loggedIn")
 	public GenericResponse updatePassword(@ApiParam(name = "password", required = true) final String password) {
 		ProteaUser user = getUser();
