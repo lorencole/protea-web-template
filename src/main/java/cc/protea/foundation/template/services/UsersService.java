@@ -171,6 +171,7 @@ public class UsersService extends ProteaService<TemplateUser> {
 	
 	@PUT
 	@Path("/{key}")
+	@ApiOperation(value = "Update a user")
 	public GenericResponse update(@PathParam("key") String key, @ApiParam(required=true) TemplateUser user) {
 		user.id = KeyUtil.toKey(key);
 		user.update();
